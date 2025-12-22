@@ -6,6 +6,7 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.util.Vector;
 
@@ -19,6 +20,22 @@ public class CrawlListener implements Listener {
     private static long DOUBLE_SHIFT_TIME = 400; // 400 milliseconds
     private static int MAX_DISTANCE_TO_TARGET_BLOCK = 3;
     private static double TELEPORT_SPEED = 0.2;
+
+
+    @EventHandler
+    public void onMove(PlayerMoveEvent event) {
+        Player player = event.getPlayer();
+
+        if(!player.isSwimming()) {return;}
+
+        Location location = player.getLocation();
+
+        Block blockAbove = location.clone().add(0,1.2,0).getBlock();
+
+        if(blockAbove.getType() == Material.AIR) {
+            exitCrawl(player);
+        }
+    }
 
     @EventHandler
     public void onSneak (PlayerToggleSneakEvent event) {
@@ -65,6 +82,12 @@ public class CrawlListener implements Listener {
         Location crawlLocation = target.getLocation().clone().add(0.5, -1, 0.5);
         player.teleport(crawlLocation);
 
+    }
+
+    private void exitCrawl(Player player){
+        player.setSwimming(false);
+
+        player.setVelocity(new Vector(0, 0.2, 0));
     }
 
 }
