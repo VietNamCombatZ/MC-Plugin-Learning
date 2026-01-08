@@ -2,3 +2,13 @@ name: LearningProject01
 version: '1.0-SNAPSHOT'
 main: project01.learningProject01.LearningProject01
 api-version: '1.21'
+
+commands:
+  lock-item:
+    description: Khóa vật phẩm
+  unlock-item:
+    description: Mở khóa vật phẩm
+
+permissions:
+  learning.admin:
+    default: op
