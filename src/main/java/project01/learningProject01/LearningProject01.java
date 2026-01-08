@@ -1,26 +1,34 @@
 package project01.learningProject01;
 
 
-import project01.learningProject01.listeners.*;
+import project01.learningProject01.common.*;
+import project01.learningProject01.crawl.*;
+import project01.learningProject01.lockItem.*;
+
 import org.bukkit.Bukkit;
 
 
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.block.Block;
-import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerToggleSneakEvent;
-import org.bukkit.util.Vector;
 
 
 public final class LearningProject01 extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        // Plugin startup logic
-        Bukkit.getPluginManager().registerEvents(new CrawlListener(), this);
 
+        // Plugin startup logic
+
+        Bukkit.getPluginManager().registerEvents(new CrawlListener(this), this);
+
+        Keys.init(this);
+
+        getCommand("lock-item").setExecutor(new LockItemCommand());
+        getCommand("lock-item").setTabCompleter(new LockItemTab());
+        getCommand("unlock-item").setExecutor(new UnlockItemCommand());
+
+        Bukkit.getPluginManager().registerEvents(
+                new LockItemListener(), this
+        );
     }
 
     @Override
