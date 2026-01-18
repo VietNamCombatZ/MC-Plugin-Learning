@@ -3,7 +3,11 @@ package project01.learningProject01;
 
 import project01.learningProject01.common.*;
 import project01.learningProject01.crawl.*;
+import project01.learningProject01.gravitygun.command.*;
+import project01.learningProject01.gravitygun.listener.*;
+import project01.learningProject01.gravitygun.particle.*;
 import project01.learningProject01.lockItem.*;
+import project01.learningProject01.gravitygun.*;
 
 import org.bukkit.Bukkit;
 
@@ -29,6 +33,22 @@ public final class LearningProject01 extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(
                 new LockItemListener(), this
         );
+
+        saveDefaultConfig();
+
+        GravityCommand gravityCommand = new GravityCommand(this);
+        getCommand("gravity").setExecutor(gravityCommand);
+        getCommand("gravity").setTabCompleter(gravityCommand);
+
+        Bukkit.getPluginManager().registerEvents(
+                new GravityInteractListener(this),
+                this
+        );
+        Bukkit.getPluginManager().registerEvents(
+                new GravityGlowListener(this), this
+        );
+
+        new GravityParticleTask(this).start();
     }
 
     @Override
