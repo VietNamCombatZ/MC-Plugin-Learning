@@ -17,7 +17,7 @@ import java.util.UUID;
 
 public class CrawlListener implements Listener {
 
-    private final HashMap<UUID, Integer> lastSneakTime = new HashMap<>();
+    private final HashMap<UUID, Long> lastSneakTime = new HashMap<>();
     private final HashSet<UUID> crawlingPlayers = new HashSet<>();
 
     private final JavaPlugin plugin;
@@ -49,11 +49,12 @@ public class CrawlListener implements Listener {
             long lastTime = lastSneakTime.get(playerID);
             if(currentTime - lastTime <= DOUBLE_SHIFT_TIME) {
                 // Double shift detected
+
                 tryCrawl(player);
             }
 
         }
-        lastSneakTime.put(playerID, (int) currentTime);
+        lastSneakTime.put(playerID, currentTime);
 
     }
 
