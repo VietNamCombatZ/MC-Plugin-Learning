@@ -3,12 +3,22 @@ version: '1.0-SNAPSHOT'
 main: project01.learningProject01.LearningProject01
 api-version: '1.21'
 
+depend: [ProtocolLib]
+
 commands:
   lock-item:
     description: Khóa vật phẩm
   unlock-item:
     description: Mở khóa vật phẩm
+  gravity:
+    description: Gravity Gun command
+    usage: /gravity <give|reload>
+    throw-force: 2.5
+    particle-radius: 1.2
 
 permissions:
   learning.admin:
     default: op
+  gravity.admin:
+    default: op
+
