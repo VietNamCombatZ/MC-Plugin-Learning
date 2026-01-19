@@ -3,7 +3,7 @@ version: '1.0-SNAPSHOT'
 main: project01.learningProject01.LearningProject01
 api-version: '1.21'
 
-depend: [ProtocolLib]
+#depend: [ProtocolLib]
 
 commands:
   lock-item:
