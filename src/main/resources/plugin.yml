@@ -13,8 +13,7 @@ commands:
   gravity:
     description: Gravity Gun command
     usage: /gravity <give|reload>
-    throw-force: 2.5
-    particle-radius: 1.2
+
 
 permissions:
   learning.admin:
